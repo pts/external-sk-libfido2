@@ -40,8 +40,8 @@ Client-side software dependencies:
   SecurityKeyProvider=...' flags below can be dropped.
 
 * libfido2 >=1.3.0. Install instructions are provided below. It doesn't work
-  with libfido2 1.2.x or earlier. Tested and works with libfido2 1.3.0,
-  1.3.1 and 1.4.0.
+  with libfido2 1.2.x or earlier (because fido_assert_sigcount(...) is missing
+  there). Tested and works with libfido2 1.3.0, 1.3.1 and 1.4.0.
 
 Server-side software dependencies:
 
