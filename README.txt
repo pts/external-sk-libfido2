@@ -8,9 +8,10 @@ security key support not enabled'.
 
 Compatibility:
 
-* OpenSSH 8.2p1 or later is needed, tested with OpenSH 8.2p1.
-* Tested on Linux desktop with udev, more specifically Debian 10 Buster.
-* Tested with libfido2 1.3.0, 1.3.1, 1.4.0.
+* OpenSSH 8.2p1 or later is needed, tested and works with OpenSH 8.2p1.
+* Tested and works on Linux desktop with udev, more specifically Debian 10
+  Buster.
+* Tested and works with libfido2 1.3.0, 1.3.1, 1.4.0.
 
 Client-side hardware dependencies:
 
@@ -25,7 +26,7 @@ Client-side hardware dependencies:
   user touches the right one.)
 
 * ED25519 support in the token is optional. (`ssh-keygen -t ecdsa-sk ...'
-* uses the NIST P-256 curve, which works with all U2F tokens.)
+  uses the NIST P-256 curve, which works with all U2F tokens.)
 
 Client-side software dependencies:
 
@@ -34,7 +35,9 @@ Client-side software dependencies:
 * OpenSSH 8.2p1 or later.
 
 * OpenSSH client (ssh) compiled with or without `configure
-  --with-security-key-builtin'.
+  --with-security-key-builtin'. It it's compiled with it, then
+  external-sk-libfido2 is not needed, and the `-w ...' and `-o
+  SecurityKeyProvider=...' flags below can be dropped.
 
 * libfido2 >=1.3.0. Install instructions are provided below. It doesn't work
   with libfido2 1.2.x or earlier. Tested and works with libfido2 1.3.0,
@@ -67,7 +70,13 @@ To use (on the client, connecting to MYSERVER):
   $ cat >>~/.ssh/authorized_keys <~/.ssh/id_mykey_sk.pub
   $ ssh MYSERVER "cat >>.ssh/authorized_keys" <~/.ssh/id_mykey_sk.pub
   $ ssh -v -i ~/.ssh/id_mykey_sk -o IdentitiesOnly=yes -o SecurityKeyProvider=$PWD/libsk-libfido2.so MYSERVER"
-  (Upon successful connection, please double check that id_mykey_sk was used.)
+  (Upon successful connection, please check on the console output that
+  id_mykey_sk was used.)
+
+FYI instead of the `-w ...' and `-o SecurityKeyProvider=...' flags, it
+possible to specify the .so pathname like this:
+
+  $ export SSH_SK_PROVIDER="$PWD/libsk-libfido2.so"
 
 Links:
 
