@@ -69,4 +69,11 @@ To use (on the client, connecting to MYSERVER):
   $ ssh -v -i ~/.ssh/id_mykey_sk -o IdentitiesOnly=yes -o SecurityKeyProvider=$PWD/libsk-libfido2.so MYSERVER"
   (Upon successful connection, please double check that id_mykey_sk was used.)
 
+Links:
+
+* tutorial: https://www.stavros.io/posts/u2f-fido2-with-ssh/
+* tutorial: https://duo.com/labs/tech-notes/u2f-key-support-in-openssh
+* OpenSSH announcement with details: http://www.openssh.com/txt/release-8.2
+* Hacker News discussion: https://news.ycombinator.com/item?id=23689499
+
 __END__
